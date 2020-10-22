@@ -5,7 +5,7 @@ $data = json_decode(file_get_contents('data.json'));
 // sleep(1);
 
 $dir = SORT_ASC;
-$sort = 0;
+$sort = null;
 $limit = 10;
 $offset = 0;
 if (isset($_GET['limit'])) {
@@ -21,7 +21,13 @@ if (isset($_GET['offset'])) {
     }
 }
 if (isset($_GET['sort'])) {
-    $sort = preg_replace('/[^a-z0-9\.\_\-]/i', '', $_GET['sort']);
+    if (stristr($_GET['sort'], ':')) {
+        $parts = explode(':', $_GET['sort'], 2);
+        $sort = preg_replace('/[^a-z0-9\.\_\-]/i', '', $parts[0]);
+        if ($parts[1] == 'dsc') {
+            $dir = SORT_DESC;
+        }
+    }
 }
 // do filters
 if (isset($_GET['search'])) {
