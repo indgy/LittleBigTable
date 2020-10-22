@@ -180,9 +180,15 @@
                 if (this.params.search) {
                     str+= '&search='+this.params.search;
                 }
-                if (this.params.sort) {
-                    str+= '&sort='+this.params.sort;
+
+                let sort = null;
+                for (i in this.sort) {
+                    sort = i + ':' + this.sort[i];
                 }
+                if (sort) {
+                    str+= '&sort='+sort;
+                }
+
                 return str;
             },
             getCurrentPage: function() {
