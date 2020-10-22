@@ -59,10 +59,10 @@
                     <thead>
                         <tr>
                             <th class="has-text-left">State <button class="button is-small" type="button" x-html="getSortIcon('state')" @click="doSort('state')"></th>
-                            <th class="has-text-left">County</th>
-                            <th>Year <button class="button is-small" type="button" x-html="getSortIcon('year')" @click="doSort('year')"></button></th>
-                            <th>Capacity</th>
-                            <th>Turbines</th>
+                            <th class="has-text-left">County <button class="button is-small" type="button" x-html="getSortIcon('county')" @click="doSort('county')"></th>
+                            <th>Year <button class="button is-small" type="button is-small" x-html="getSortIcon('year')" @click="doSort('year')"></button></th>
+                            <th>Capacity <button class="button is-small" type="button" x-html="getSortIcon('turbine_capacity')" @click="doSort('turbine_capacity')"></th>
+                            <th>Turbines <button class="button is-small" type="button" x-html="getSortIcon('project_capacity')" @click="doSort('project_capacity')"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -248,20 +248,23 @@
             },
             getSortIcon: function(col) {
                 // checks for name in sort and displays the correct sort icon
-                let none = '<title>Click to sort</title><g id="sort-none" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><polygon id="desc" fill="#979797" transform="translate(100.000000, 140.000000) scale(1, -1) translate(-100.000000, -140.000000) " points="100 110 160 170 40 170"></polygon><polygon id="asc" fill="#979797" points="100 30 160 90 40 90"></polygon></g>';
-                let dsc = '<title>Sort descending</title><g id="sort-desc" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><polygon id="desc" fill="#979797" transform="translate(100.000000, 140.000000) scale(1, -1) translate(-100.000000, -140.000000) " points="100 110 160 170 40 170"></polygon></g>';
-                let asc = '<title>Sort ascending</title><g id="sort-asc" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><polygon id="asc" fill="#979797" points="100 30 160 90 40 90"></polygon></g>';
-                let img = (this.sort[col] == 'asc') ? asc : dsc;
-                if (undefined == this.sort[col]) {
-                    img = none;
-                }
                 str = '<img alt="" src="';
                 str+= 'data:image/svg+xml;utf-8,';
                 str+= '<?xml version="1.0" encoding="UTF-8"?>';
-                str+= '<svg width="20px" height="20px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">';
-                str+= img;
-                str+= '</svg>"';
-                str+= ' />';
+                str = '<svg width="20px" height="20px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">';
+
+                if (undefined == this.sort[col]) {
+                    str+= '<title>Click to sort</title><g id="sort-none" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><polygon id="desc" fill="#979797" transform="translate(100.000000, 140.000000) scale(1, -1) translate(-100.000000, -140.000000) " points="100 110 160 170 40 170"></polygon><polygon id="asc" fill="#979797" points="100 30 160 90 40 90"></polygon></g>';
+                } else {
+                    if (this.sort[col] == 'asc') {
+                        str+= '<title>Sort ascending</title><g id="sort-asc" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><polygon id="asc" fill="#979797" points="100 30 160 90 40 90"></polygon></g>';
+                    } else {
+                        str+= '<title>Sort descending</title><g id="sort-desc" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><polygon id="desc" fill="#979797" transform="translate(100.000000, 140.000000) scale(1, -1) translate(-100.000000, -140.000000) " points="100 110 160 170 40 170"></polygon></g>';
+                    }
+                }
+                
+                str+= '</svg>';
+                // str+= '">';
                 return str;
             },
             setLimit: function() {
