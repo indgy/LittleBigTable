@@ -58,7 +58,7 @@
                 <table class="table is-fullwidth">
                     <thead>
                         <tr>
-                            <th class="has-text-left">State</th>
+                            <th class="has-text-left">State <button class="button is-small" type="button" x-html="getSortIcon('state')" @click="doSort('state')"></th>
                             <th class="has-text-left">County</th>
                             <th>Year <button class="button is-small" type="button" x-html="getSortIcon('year')" @click="doSort('year')"></button></th>
                             <th>Capacity</th>
@@ -116,6 +116,7 @@
             config: {
                 url: 'http://localhost:8080/json.php',
                 key_prefix: 'littleTable',
+                multisort: false,
                 messages: {
                     loading: 'Loading...',
                     failed: 'Loading data failed',
@@ -137,7 +138,6 @@
             sort: {
                 // stores the columns being sorted
                 // e.g. column: dir
-                param: 'sort',
             },
             loading: {
                 page: false,
@@ -179,18 +179,15 @@
                 // special field formatters
                 
             },
-            sortBy: function(name) {
-                // handles the change of sort
-            },
             getUrlParams: function() {
                 let str = '?limit='+this.params.limit+'&offset='+this.params.offset;
                 if (this.params.search) {
                     str+= '&search='+this.params.search;
                 }
+                if (this.params.sort) {
+                    str+= '&sort='+this.params.sort;
+                }
                 return str;
-            },
-            getButtonSort: function(col) {
-                
             },
             getCurrentPage: function() {
                 if (this.params.offset == 0) {
@@ -248,13 +245,23 @@
                 }
                 return 'Showing <strong>' + this.getFirstDisplayedRow() + '</strong> to <strong>' + this.getLastDisplayedRow() + '</strong> of <strong>' + this.getTotalRows() + '</strong> ' + name;
             },
-            getSortIcon: function(name) {
+            getSortIcon: function(col) {
                 // checks for name in sort and displays the correct sort icon
-                let none = '<?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><title>Click to sort</title><g id="sort-none" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><polygon id="desc" fill="#979797" transform="translate(100.000000, 140.000000) scale(1, -1) translate(-100.000000, -140.000000) " points="100 110 160 170 40 170"></polygon><polygon id="asc" fill="#979797" points="100 30 160 90 40 90"></polygon></g></svg>';
-                let dsc = '<?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><title>Click to sort</title><g id="sort-none" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><polygon id="desc" fill="#979797" transform="translate(100.000000, 140.000000) scale(1, -1) translate(-100.000000, -140.000000) " points="100 110 160 170 40 170"></polygon><polygon id="asc" fill="#979797" points="100 30 160 90 40 90"></polygon></g></svg>';
-                let asc = '<?xml version="1.0" encoding="UTF-8"?><svg width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><title>Click to sort</title><g id="sort-none" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><polygon id="desc" fill="#979797" transform="translate(100.000000, 140.000000) scale(1, -1) translate(-100.000000, -140.000000) " points="100 110 160 170 40 170"></polygon><polygon id="asc" fill="#979797" points="100 30 160 90 40 90"></polygon></g></svg>';
-
-                return '<img alt="" src="data:image/svg+xml;utf-8,' + none + '" />';
+                let none = '<title>Click to sort</title><g id="sort-none" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><polygon id="desc" fill="#979797" transform="translate(100.000000, 140.000000) scale(1, -1) translate(-100.000000, -140.000000) " points="100 110 160 170 40 170"></polygon><polygon id="asc" fill="#979797" points="100 30 160 90 40 90"></polygon></g>';
+                let dsc = '<title>Sort descending</title><g id="sort-desc" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><polygon id="desc" fill="#979797" transform="translate(100.000000, 140.000000) scale(1, -1) translate(-100.000000, -140.000000) " points="100 110 160 170 40 170"></polygon></g>';
+                let asc = '<title>Sort ascending</title><g id="sort-asc" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><polygon id="asc" fill="#979797" points="100 30 160 90 40 90"></polygon></g>';
+                let img = (this.sort[col] == 'asc') ? asc : dsc;
+                if (undefined == this.sort[col]) {
+                    img = none;
+                }
+                str = '<img alt="" src="';
+                str+= 'data:image/svg+xml;utf-8,';
+                str+= '<?xml version="1.0" encoding="UTF-8"?>';
+                str+= '<svg width="20px" height="20px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">';
+                str+= img;
+                str+= '</svg>"';
+                str+= ' />';
+                return str;
             },
             setLimit: function() {
                 // sanity check input
@@ -271,6 +278,15 @@
             },
             setStatus: function(str) {
                 this.meta.status = str;
+            },
+            toggleSortColumn: function(col) {
+                if (undefined == this.sort[col]) {
+                    this.sort[col] = 'asc';
+                } else if (this.sort[col] == 'asc') {
+                    this.sort[col] = 'dsc';
+                } else if (this.sort[col] == 'dsc') {
+                    delete this.sort[col];
+                }
             },
             addRow: function(data) {
                 // todo check for field formatter by name
@@ -302,12 +318,17 @@
                     this.fetch();
                 }
             },
-            doSort: function() {
-                this.loading.sort = true;
+            doSort: function(col) {
+                if (false == this.config.multisort) {
+                    let state = this.sort[col];
+                    this.sort = {};
+                    this.sort[col] = state;
+                }
+                this.toggleSortColumn(col);
                 this.fetch();
             },
             dd: function() {
-                return JSON.stringify(this.params);
+                return JSON.stringify(this.params) + JSON.stringify(this.sort);
             }
         }
     }
