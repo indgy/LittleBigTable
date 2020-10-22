@@ -1,6 +1,7 @@
 <?php
 $data = json_decode(file_get_contents('data.json'));
 
+// emulate network delay
 // sleep(1);
 
 $dir = SORT_ASC;
