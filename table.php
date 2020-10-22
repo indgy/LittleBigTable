@@ -123,7 +123,7 @@
                 multisort: false,
                 messages: {
                     loading: 'Loading...',
-                    failed: 'Loading data failed',
+                    failed: 'Loading failed',
                     summary: 'rows'
                 },
                 formatters: {
@@ -332,7 +332,7 @@
                 this.fetch();
             },
             dd: function() {
-                return JSON.stringify(this.params) + JSON.stringify(this.sort);
+                return JSON.stringify(this.params) + JSON.stringify(this.meta) + JSON.stringify(this.sort);
             }
         }
     }
