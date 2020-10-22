@@ -316,10 +316,8 @@
                 // todo jump to a particular page number
             },
             doSearch: function() {
-                if (this.params.search && this.params.search.length > 1) {
-                    this.params.offset = 0;
-                    this.fetch();
-                }
+                this.params.offset = 0;
+                this.fetch();
             },
             doSort: function(col) {
                 if (false == this.config.multisort) {
