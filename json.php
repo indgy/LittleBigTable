@@ -21,11 +21,14 @@ if (isset($_GET['offset'])) {
     }
 }
 if (isset($_GET['sort'])) {
-    if (stristr($_GET['sort'], ':')) {
-        $parts = explode(':', $_GET['sort'], 2);
-        $sort = preg_replace('/[^a-z0-9\.\_\-]/i', '', $parts[0]);
-        if ($parts[1] == 'dsc') {
-            $dir = SORT_DESC;
+    foreach (explode(',', $_GET['sort']) as $column) {
+        //TODO handle multiple sort columns, use array, later check for array or string
+        if (stristr($_GET['sort'], ':')) {
+            $parts = explode(':', $_GET['sort'], 2);
+            $sort = preg_replace('/[^a-z0-9\.\_\-]/i', '', $parts[0]);
+            if ($parts[1] == 'dsc') {
+                $dir = SORT_DESC;
+            }
         }
     }
 }
@@ -42,7 +45,7 @@ if (isset($_GET['search'])) {
     });
 }
 
-// do sort
+// do sort - todo handle multiple column sort
 if ($sort) {
     $cols = array_column($data, $sort);
     array_multisort($cols, $dir, $data);
