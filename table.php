@@ -55,14 +55,14 @@
 
                     </div>
                 </div>
-                <table class="table is-fullwidth">
+                <table class="table is-fullwidth is-hoverable">
                     <thead>
                         <tr>
-                            <th class="has-text-left">State <button class="button is-small" type="button" x-html="getSortIcon('state')" @click="doSort('state')"></th>
-                            <th class="has-text-left">County <button class="button is-small" type="button" x-html="getSortIcon('county')" @click="doSort('county')"></th>
-                            <th>Year <button class="button is-small" type="button is-small" x-html="getSortIcon('year')" @click="doSort('year')"></button></th>
-                            <th>Capacity <button class="button is-small" type="button" x-html="getSortIcon('turbine_capacity')" @click="doSort('turbine_capacity')"></th>
-                            <th>Turbines <button class="button is-small" type="button" x-html="getSortIcon('project_capacity')" @click="doSort('project_capacity')"></th>
+                            <th class="has-text-left">State <button class="button is-small is-text" type="button" x-html="getSortIcon('state')" @click="doSort('state')"></th>
+                            <th class="has-text-left">County <button class="button is-small is-text" type="button" x-html="getSortIcon('county')" @click="doSort('county')"></th>
+                            <th>Year <button class="button is-small is-text" type="button is-small is-text" x-html="getSortIcon('year')" @click="doSort('year')"></button></th>
+                            <th>Capacity <button class="button is-small is-text" type="button" x-html="getSortIcon('turbine_capacity')" @click="doSort('turbine_capacity')"></th>
+                            <th>Turbines <button class="button is-small is-text" type="button" x-html="getSortIcon('project_capacity')" @click="doSort('project_capacity')"></th>
                         </tr>
                     </thead>
                     <tbody>
