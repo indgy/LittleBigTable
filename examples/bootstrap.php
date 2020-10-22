@@ -66,8 +66,6 @@
                 <div class="py-4">
                     <div class="float-left">
                         <p x-html="meta.status"></p>
-                        <!-- <p x-html="getPagerSummaryPages()"></p> -->
-                        <!-- <p x-html="getPagerSummaryRows('rows')"></p> -->
                     </div>
                     <div class="float-right">
                         <nav aria-label="Page navigation example">

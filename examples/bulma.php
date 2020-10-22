@@ -80,8 +80,6 @@
                 <div class="level">
                     <div class="level-left">
                         <p x-html="meta.status"></p>
-                        <!-- <p x-html="getPagerSummaryPages()"></p> -->
-                        <!-- <p x-html="getPagerSummaryRows('rows')"></p> -->
                     </div>
                     <div class="level-right">
                         <nav class="pagination" role="navigation" aria-label="pagination">
