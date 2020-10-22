@@ -67,7 +67,7 @@
                     </thead>
                     <tbody>
                         <template x-for="row in rows">
-                            <tr>
+                            <tr @click="doClickedRow($event, doSomethingWhenRowIsClicked)" data-id="xyz">
                                 <td x-text="row.state"></td>
                                 <td x-text="row.county"></td>
                                 <td class="has-text-centered" x-text="row.year"></td>
@@ -111,6 +111,10 @@
     </section>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.1/dist/alpine.min.js" defer></script>
     <script>
+    function doSomethingWhenRowIsClicked(e) {
+        console.log('the row was clicked');
+        console.log(e);
+    }
     function littleTable() {
         return {
             config: {
@@ -314,6 +318,10 @@
             },
             goToPage: function() {
                 // todo jump to a particular page number
+            },
+            doClickedRow: function(event, callback) {
+                let fn = (typeof callback == 'function') ? callback : new Function(callback);
+                fn(event);
             },
             doSearch: function() {
                 this.params.offset = 0;
