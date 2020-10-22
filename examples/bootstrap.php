@@ -90,7 +90,7 @@
     function littleTable() {
         return {
             config: {
-                url: 'http://localhost:8080/json.php',
+                url: 'http://localhost:8080/examples/json.php',
                 key_prefix: 'littleTable',
                 multisort: false,
                 messages: {
