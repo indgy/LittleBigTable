@@ -131,13 +131,13 @@
                         return '<strong>' + value + '</strong>';
                     },
                     'turbine_capacity': function(value, row) {
-                        if (parseInt(value) < 1000) {
-                            return '<span class="is-warning">' + value  + "</span>";
+                        if (parseInt(value) < 1500) {
+                            return '<span class="has-text-warning has-text-weight-medium">' + value  + "</span>";
                         }
                         if (parseInt(value) > 2000) {
-                            return '<span class="is-success">' + value  + "</span>";
+                            return '<span class="has-text-success has-text-weight-medium">' + value  + "</span>";
                         }
-                        return value;
+                        return '<span class="has-text-link has-text-weight-medium">' + value  + "</span>";
                     }
                 },
             },
