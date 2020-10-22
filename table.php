@@ -211,14 +211,14 @@
                 return 0;
             },
             getPrevPageOffset: function() {
-                int = parseInt(parseInt(this.getCurrentPage() - 2) * parseInt(this.params.limit));
+                let int = parseInt(parseInt(this.getCurrentPage() - 2) * parseInt(this.params.limit));
                 return (int < 0)  ? 0 : int;
             },
             getNextPageOffset: function() {
-                return parseInt(parseInt(this.getCurrentPage()) * parseInt(this.params.limit));
+                let int = parseInt(parseInt(this.getCurrentPage()) * parseInt(this.params.limit));
             },
             getLastPageOffset: function() {
-                int = parseInt(parseInt(this.getTotalPages() - 1) * parseInt(this.params.limit));
+                let int = parseInt(parseInt(this.getTotalPages() - 1) * parseInt(this.params.limit));
                 return (int < 0)  ? 0 : int;
             },
             getOffsetForPage: function() {
@@ -235,7 +235,7 @@
                 return this.params.offset + 1;
             },
             getLastDisplayedRow: function() {
-                int = parseInt(this.params.offset) + parseInt(this.params.limit);
+                let int = parseInt(this.params.offset) + parseInt(this.params.limit);
                 if (int > this.params.total) {
                     return this.params.total;
                 }
@@ -252,11 +252,7 @@
             },
             getSortIcon: function(col) {
                 // checks for name in sort and displays the correct sort icon
-                str = '<img alt="" src="';
-                str+= 'data:image/svg+xml;utf-8,';
-                str+= '<?xml version="1.0" encoding="UTF-8"?>';
-                str = '<svg width="20px" height="20px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">';
-
+                let str = '<svg width="20px" height="20px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">';
                 if (undefined == this.sort[col]) {
                     str+= '<title>Click to sort</title><g id="sort-none" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><polygon id="desc" fill="#979797" transform="translate(100.000000, 140.000000) scale(1, -1) translate(-100.000000, -140.000000) " points="100 110 160 170 40 170"></polygon><polygon id="asc" fill="#979797" points="100 30 160 90 40 90"></polygon></g>';
                 } else {
@@ -266,9 +262,7 @@
                         str+= '<title>Sort descending</title><g id="sort-desc" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><polygon id="desc" fill="#979797" transform="translate(100.000000, 140.000000) scale(1, -1) translate(-100.000000, -140.000000) " points="100 110 160 170 40 170"></polygon></g>';
                     }
                 }
-                
                 str+= '</svg>';
-                // str+= '">';
                 return str;
             },
             setLimit: function() {
