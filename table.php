@@ -22,7 +22,7 @@
                             </div>
                             <div class="field-body">
                                 <div class="field is-narrow">
-                                    <div class="control" :class="{'is-loading': loading.search}">
+                                    <div class="control">
                                         <input class="input" type="text" placeholder="Start typing..." x-model="params.search" @keyup.debounce.350="doSearch()">
                                     </div>
                                 </div>
@@ -124,6 +124,7 @@
                 }
             },
             meta: {
+                loading: false,
                 status: null,
             },
             params: {
@@ -139,10 +140,6 @@
                 // stores the columns being sorted
                 // e.g. column: dir
             },
-            loading: {
-                page: false,
-                search: false,
-            },
             init: function() {
                 // set preferences from localStorage
                 this.params.limit = localStorage.getItem(this.config.key_prefix + '.limit');
@@ -153,7 +150,7 @@
             },
             fetch: function() {
                 // fetch and populate data using current state for filter/search
-                this.loading.page = true;
+                this.meta.loading = true;
                 this.setStatus(this.config.messages.loading);
                 fetch(this.config.url + this.getUrlParams(), {
                     headers: {
@@ -167,8 +164,7 @@
                           this.addRow(json.data[i]);
                       }
                   }).then(() => {
-                      this.loading.page = false;
-                      this.loading.search = false;
+                      this.meta.loading = false;
                       this.setStatus(this.getSummary(this.config.messages.summary));
                   }).catch(error => {
                       console.error('Network fetch failed:', error);
@@ -236,7 +232,6 @@
                 return int;
             },
             getSummary: function(type='rows', name='results') {
-                console.log(this.rows.length);
                 if ( ! this.rows.length) {
                     return 'No results';
                 }
@@ -309,11 +304,10 @@
                 this.fetch();
             },
             goToPage: function() {
-                // jump to a particular page number
+                // todo jump to a particular page number
             },
             doSearch: function() {
                 if (this.params.search && this.params.search.length > 1) {
-                    this.loading.search = true;
                     this.params.offset = 0;
                     this.fetch();
                 }
