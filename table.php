@@ -125,7 +125,12 @@
                     loading: 'Loading...',
                     failed: 'Loading data failed',
                     summary: 'rows'
-                }
+                },
+                formatters: {
+                    state: function(str, row) {
+                        return '<strong>' + str + '</strong>';
+                    }
+                },
             },
             meta: {
                 loading: false,
@@ -174,10 +179,6 @@
                       console.error('Network fetch failed:', error);
                       this.setStatus(this.config.messages.failed);
                   });
-            },
-            formatters: function(column) {
-                // special field formatters
-                
             },
             getUrlParams: function() {
                 let str = '?limit='+this.params.limit+'&offset='+this.params.offset;
