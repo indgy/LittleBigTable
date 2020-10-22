@@ -68,10 +68,10 @@
                     <tbody>
                         <template x-for="row in rows">
                             <tr @click="doClickedRow($event, doSomethingWhenRowIsClicked)" data-id="xyz">
-                                <td x-text="row.state"></td>
+                                <td x-html="row.state"></td>
                                 <td x-text="row.county"></td>
                                 <td class="has-text-centered" x-text="row.year"></td>
-                                <td class="has-text-centered" x-text="row.turbine_capacity"></td>
+                                <td class="has-text-centered" x-html="row.turbine_capacity"></td>
                                 <td class="has-text-centered" x-text="row.project_capacity"></td>
                             </tr>
                         </template>
@@ -127,8 +127,17 @@
                     summary: 'rows'
                 },
                 formatters: {
-                    state: function(str, row) {
-                        return '<strong>' + str + '</strong>';
+                    'state': function(value, row) {
+                        return '<strong>' + value + '</strong>';
+                    },
+                    'turbine_capacity': function(value, row) {
+                        if (parseInt(value) < 1000) {
+                            return '<span class="is-warning">' + value  + "</span>";
+                        }
+                        if (parseInt(value) > 2000) {
+                            return '<span class="is-success">' + value  + "</span>";
+                        }
+                        return value;
                     }
                 },
             },
@@ -179,6 +188,19 @@
                       console.error('Network fetch failed:', error);
                       this.setStatus(this.config.messages.failed);
                   });
+            },
+            addRow: function(data) {
+                // todo check for field formatter by name
+                let row = {};
+                for (i in data) {
+                    if (typeof this.config.formatters[i] == 'function') {
+                        fn = this.config.formatters[i];
+                        row[i] = fn(data[i], data);
+                    } else {
+                        row[i] = data[i];
+                    }
+                }
+                this.rows.push(row);
             },
             getUrlParams: function() {
                 let str = '?limit='+this.params.limit+'&offset='+this.params.offset;
@@ -290,10 +312,6 @@
                 } else if (this.sort[col] == 'dsc') {
                     delete this.sort[col];
                 }
-            },
-            addRow: function(data) {
-                // todo check for field formatter by name
-                this.rows.push(data);
             },
             goFirstPage: function() {
                 this.params.offset = this.getFirstPageOffset();
