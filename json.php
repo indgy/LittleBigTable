@@ -1,5 +1,5 @@
 <?php
-$data = json_decode(file_get_contents('wt_short.json'));
+$data = json_decode(file_get_contents('data.json'));
 
 // sleep(1);
 
