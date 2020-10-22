@@ -239,6 +239,7 @@
             },
             getNextPageOffset: function() {
                 let int = parseInt(parseInt(this.getCurrentPage()) * parseInt(this.params.limit));
+                return int;
             },
             getLastPageOffset: function() {
                 let int = parseInt(parseInt(this.getTotalPages() - 1) * parseInt(this.params.limit));
@@ -260,7 +261,7 @@
             getLastDisplayedRow: function() {
                 let int = parseInt(this.params.offset) + parseInt(this.params.limit);
                 if (int > this.params.total) {
-                    return this.params.total;
+                    int = this.params.total;
                 }
                 return int;
             },
