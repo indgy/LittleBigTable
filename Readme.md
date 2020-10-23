@@ -4,15 +4,17 @@
 
 ![Screenshot](screenshot.png)
 
-*It is very new and while it works well for my purposes if you find any issues, please report them in the issue tracker.* 
+See the [Complete example](http://iangrindley.uk/LittleBigTable/examples/basic.php) in action.
 
-It is CSS agnostic so can be used with any css framework, the default examples use Bulma, there is also a basic example using Bootstrap 4. 
+*LittleBigTable is very new and while it works well for my purposes you may find issues, please report them in the issue tracker.* 
 
-I imagine it would be great with TailwindCSS too, as you have complete control over the HTML you can structure and style it however you wish.
+LittleBigTable is CSS agnostic and can be used with any css framework, the default examples use Bulma, there is also a [Bootstrap example](http://iangrindley.uk/LittleBigTable/examples/bootstrap.php) using Bootstrap 4 and a [Basic example](http://iangrindley.uk/LittleBigTable/examples/basic.php) with no css. I imagine it would be great with TailwindCSS too.
+
+As you have complete control over the HTML you can structure and style it however you wish.
 
 ## Goals
 
- * Allow you the developer to completely control the look and feel of the table by wrapping a standard HTML table in as an AlpineJS component.
+ * Allow you the developer to completely control the look and feel of the table by wrapping a standard HTML table in an AlpineJS component.
  * Make the viewing and searching of large remote datasets easy, it does not use local data, it only fetches data from your chosen endpoint.
 
 ## Why
@@ -49,7 +51,7 @@ This is the starting point for all LittleBigTables, you must wrap your table in 
 <script src="/path/to/LittleBigTable.min.js"></script>
 ```
 
-Check the source of the Basic example to see this in action.
+Check the source of the [Basic example](http://iangrindley.uk/LittleBigTable/examples/basic.php) to see this in action.
 
 
 ### Settings
@@ -58,7 +60,7 @@ The following settings can be overriden by passing in an object in the `x-data` 
 
 ## Fetching data
 
-LittleBigTable expects a JSON response from your endpoint, it must consist of two properties, an Integer `total` and an Array `data` with total being the total number of rows in the remote dataset and data containing the subset of rows to be displayed.
+LittleBigTable expects a JSON response from your endpoint, the object must contain two properties, an Integer `total` and an Array `data` with total being the total number of rows in the remote dataset and data containing the subset of rows to be displayed.
 
 In PHP you might do something like this:
 
@@ -82,10 +84,10 @@ echo json_encode([
 ]);
 ``` 
 
-In the examples folder you'll find a simple PHP JSON server, it can be started on your local machine by using the built in PHP server:
+In the examples folder you'll find a simple PHP JSON server, it can be started on your local machine by using the built in PHP server, type the following into your terminal:
 
 ```sh
-> php -S localhost:8080
+php -S localhost:8080
 ```
 
 ## Formatting cell contents
@@ -154,7 +156,7 @@ Row limiters limit the number of rows displayed at any one time, the default is 
 
 Simply add a drop down and add the '' function. This is limited to between 1 and 100 rows.
 
-Check the Complete example for details.
+Check the [Complete example](http://iangrindley.uk/LittleBigTable/examples/complete.php) for more details.
 
 #### Adding a search box
 
@@ -162,7 +164,7 @@ A search box can be used to filter your remote data.
 
 Add the code for the search box, ensuring it is inside the  component div (the one with the x-data attribute) and add the following ''
 
-Check the Complete example for details.
+Check the [Complete example](http://iangrindley.uk/LittleBigTable/examples/complete.php) for more details.
 
 #### Making columns sortable
 
@@ -186,7 +188,7 @@ The `getSortIcon()` method will automatically show the correct icon state using 
 
 The `doSort()` method sets the URL sort parameter and fetches the sorted data. The url parameter appears as `&sort=column_name:asc` or  `&sort=column_name:dsc` depending on the requested sort direction.
 
-Check the Complete example for more details.
+Check the [Complete example](http://iangrindley.uk/LittleBigTable/examples/complete.php) for more details.
 
 
 ### Custom events
