@@ -4,7 +4,9 @@
 
 *It is very new and while it works well for my purposes if you find any issues, please report them in the issue tracker.* 
 
-It is compatible with any css framework, the default examples use Bulma, there is also a basic example using Bootstrap 4. I imagine it would be great with TailwindCSS too, as you have complete control over the HTML you can structure and style it however you wish.
+It is CSS agnostic so can be used with any css framework, the default examples use Bulma, there is also a basic example using Bootstrap 4. 
+
+I imagine it would be great with TailwindCSS too, as you have complete control over the HTML you can structure and style it however you wish.
 
 ## Goals
 
@@ -86,15 +88,15 @@ In the examples folder you'll find a simple PHP JSON server, it can be started o
 
 ## Formatting cell contents
 
-Before the cell data is loaded it can be modified using formatters, this can add links, show images or colour the cell as required.
+Before the cell data is rendered it can be modified using formatters, they are functions that return a string and can be used to add links, classes, show images or anything you can think of.
 
-NB: If you are returning HTML you must us the x-html directive, if you use x-text the HTML will be escaped.
+NB: If you are returning HTML you must us the `x-html` directive on the `<td>` element, if you use `x-text` the HTML will be escaped.
 
 ### Creating a formatter
 
-To create a formatter and your function into the formatters setting passed to LittleBigTable. Your function will receive the cell value and the complete row data. Whatever you return will be displayed in the cell.
+To create a formatter add your function into the formatters setting passed to LittleBigTable. Your function will receive the cell value and the complete row data. Whatever you return will be displayed in the cell.
 
-Assuming you have a column called `year` you can create a formatter as follows:
+Assuming you have columns called `year` and `rating` you can create formatters as follows:
 
 ```js
 
@@ -122,17 +124,16 @@ let settings = {
 
 ``` 
 
-That example would add the class 'blue' to any year in the last century and colour ratings in red or green depending on the value of rating.
-
+That example would add the class 'blue' to any year in the last century and add the classes 'red' or 'green' to the rating depending on its value.
 
 
 ## Adding functionality
 
-#### Adding a statusbar
+#### Displaying the statusbar
 
-Add a statusbar to notify the user of the loading state or errors and provide a handy reference to where they are in the results.
+Show a statusbar to show handy messages to the user, loading state or errors and provide a handy reference to where they are in the results.
 
-Simply add the following somewhere inside your component.
+Simply add the following somewhere inside your component `<div>`.
 
 `<p x-html="meta.status"></p>`
 
@@ -151,11 +152,15 @@ Row limiters limit the number of rows displayed at any one time, the default is 
 
 Simply add a drop down and add the '' function. This is limited to between 1 and 100 rows.
 
+Check the Complete example for details.
+
 #### Adding a search box
 
 A search box can be used to filter your remote data.
 
 Add the code for the search box, ensuring it is inside the  component div (the one with the x-data attribute) and add the following ''
+
+Check the Complete example for details.
 
 #### Making columns sortable
 
@@ -178,6 +183,8 @@ Add the `<button>` element to your `th` using the `x-html` and `@click` directiv
 The `getSortIcon()` method will automatically show the correct icon state using an icon from icons.svg.
 
 The `doSort()` method sets the URL sort parameter and fetches the sorted data. The url parameter appears as `&sort=column_name:asc` or  `&sort=column_name:dsc` depending on the requested sort direction.
+
+Check the Complete example for more details.
 
 
 ### Custom events
