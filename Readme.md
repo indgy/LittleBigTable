@@ -4,7 +4,7 @@
 
 ![Screenshot](screenshot.png)
 
-See the [Complete example](http://iangrindley.uk/LittleBigTable/examples/basic.php) in action.
+See the [Complete example](http://iangrindley.uk/LittleBigTable/examples/complete.php) in action, this uses Bulma for the styling as shown above.
 
 *LittleBigTable is very new and while it works well for my purposes you may find issues, please report them in the issue tracker.* 
 
