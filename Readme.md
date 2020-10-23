@@ -1,13 +1,10 @@
-objectives
+# LittleBigTable
 
-plain table using html to layout
+LittleBigTable is a simple AlpineJS 'plugin' to make any html table with a remote data source interactive.
 
-additional features - search, column filter, pagination are optional.
+It is ideal if you have a large set of data on a remote server and wish to display it piece by piece to your user.
 
-
-js handles fetch and population of state
-js handles sorting
-
+I created this as too many table plugins render the table in an opinionated fashion, I wanted to be able to write the table in HTML and 'sprinkle' the JS to make it interactive.
 
 
 <table x-data="littleBigTable">
