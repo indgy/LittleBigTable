@@ -4,6 +4,7 @@ function LittleBigTable(settings) {
         settings: {
             url: null,
             key_prefix: 'lbt',
+            limit: 10,
             multisort: false,
             messages: {
                 loading: 'Loading...',
@@ -20,7 +21,7 @@ function LittleBigTable(settings) {
         },
         // stores the parameters passed in query string
         params: {
-            limit: 15,
+            limit: 10,
             offset: 0,
             search: null,
             total: 0,
@@ -34,7 +35,7 @@ function LittleBigTable(settings) {
           // set preferences from localStorage
           this.params.limit = localStorage.getItem(this.settings.key_prefix + '.limit');
           if (this.params.limit < 10 || this.params.limit > 100) {
-            this.params.limit = 25;
+            this.params.limit = this.settings.limit;
           }
           // apply settings - should this use getters/setter methods to sanity check input?
           for (i in settings) {
@@ -54,10 +55,7 @@ function LittleBigTable(settings) {
           this.meta.loading = true;
           this.setStatus(this.settings.messages.loading);
           fetch(this.settings.url + this.getUrlParams(), {
-              headers: {
-                  'Origin': 'http://localhost:8080',
-                  'Content-type': 'application/x-www-form-urlencoded'
-              }
+              headers: {}
           }).then(response => {
               return response.json()
           }).then(json => {
@@ -70,7 +68,7 @@ function LittleBigTable(settings) {
                 this.meta.loading = false;
                 this.setStatus(this.getSummary(this.settings.messages.summary));
             }).catch(error => {
-                console.error('Network fetch failed:', error);
+                console.error('Network fetch failed, did you set the endpoint correctly? Error: ', error);
                 this.setStatus(this.settings.messages.failed);
             });
         },

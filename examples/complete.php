@@ -77,11 +77,11 @@
                 <table class="table is-fullwidth is-hoverable">
                     <thead>
                         <tr>
-                            <th class="has-text-left">State <button class="button is-small is-text" type="button" x-html="getSortIcon('state')" @click="doSort('state')"></th>
-                            <th class="has-text-left">County <button class="button is-small is-text" type="button" x-html="getSortIcon('county')" @click="doSort('county')"></th>
+                            <th class="has-text-left">State <button class="button is-small is-text" type="button" x-html="getSortIcon('state')" @click="doSort('state')"></button></th>
+                            <th class="has-text-left">County <button class="button is-small is-text" type="button" x-html="getSortIcon('county')" @click="doSort('county')"></button></th>
                             <th class="has-text-centered">Year <button class="button is-small is-text" type="button" x-html="getSortIcon('year')" @click="doSort('year')"></button></th>
-                            <th class="has-text-centered">Capacity <button class="button is-small is-text" type="button" x-html="getSortIcon('turbine_capacity')" @click="doSort('turbine_capacity')"></th>
-                            <th class="has-text-centered">Turbines <button class="button is-small is-text" type="button" x-html="getSortIcon('project_capacity')" @click="doSort('project_capacity')"></th>
+                            <th class="has-text-centered">Capacity <button class="button is-small is-text" type="button" x-html="getSortIcon('turbine_capacity')" @click="doSort('turbine_capacity')"></button></th>
+                            <th class="has-text-centered">Turbines <button class="button is-small is-text" type="button" x-html="getSortIcon('project_capacity')" @click="doSort('project_capacity')"></button></th>
                         </tr>
                     </thead>
                     <tbody>
