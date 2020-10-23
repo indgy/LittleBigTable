@@ -1,83 +1,86 @@
-function littleTable() {
+function LittleBigTable(settings) {
     return {
-        config: {
-            url: 'http://localhost:8080/json.php',
-            key_prefix: 'littleTable',
+        // settings for the developer to override
+        settings: {
+            url: null,
+            key_prefix: 'lbt',
             multisort: false,
             messages: {
                 loading: 'Loading...',
                 failed: 'Loading failed',
                 summary: 'rows'
             },
-            formatters: {
-                'state': function(value, row) {
-                    return '<strong>' + value + '</strong>';
-                },
-                'turbine_capacity': function(value, row) {
-                    if (parseInt(value) < 1500) {
-                        return '<span class="has-text-warning has-text-weight-medium">' + value  + "</span>";
-                    }
-                    if (parseInt(value) > 2000) {
-                        return '<span class="has-text-success has-text-weight-medium">' + value  + "</span>";
-                    }
-                    return '<span class="has-text-link has-text-weight-medium">' + value  + "</span>";
-                }
-            },
+            formatters: {},
+            icon: '../dist/icons.svg',
         },
+        // stores the ui state
         meta: {
             loading: false,
             status: null,
         },
+        // stores the parameters passed in query string
         params: {
             limit: 15,
             offset: 0,
             search: null,
             total: 0,
         },
-        rows: [
-            // stores the rows
-        ],
-        sort: {
-            // stores the columns being sorted
-            // e.g. column: dir
-        },
+        // stores the table rows
+        rows: [],
+        // stores the column(s) sorting state
+        sort: {},
+        // initial setup before interaction
         init: function() {
-            // set preferences from localStorage
-            this.params.limit = localStorage.getItem(this.config.key_prefix + '.limit');
-            if (this.params.limit < 10 || this.params.limit > 100) {
-                this.params.limit = 25;
+          // set preferences from localStorage
+          this.params.limit = localStorage.getItem(this.settings.key_prefix + '.limit');
+          if (this.params.limit < 10 || this.params.limit > 100) {
+            this.params.limit = 25;
+          }
+          // apply settings - should this use getters/setter methods to sanity check input?
+          for (i in settings) {
+            if (this.settings.hasOwnProperty(i)) {
+              this.settings[i] = settings[i];
             }
-            this.fetch();
+          }
+          // fetch data
+          this.fetch();
         },
+        // fetch and populate data using current state
         fetch: function() {
-            // fetch and populate data using current state for filter/search
-            this.meta.loading = true;
-            this.setStatus(this.config.messages.loading);
-            fetch(this.config.url + this.getUrlParams(), {
-                headers: {
-                    'Origin': 'http://localhost:8080',
-                    'Content-type': 'application/x-www-form-urlencoded'
+          if ( ! this.settings.url) {
+            this.setStatus('Missing api url, pass it in the settings.');
+            return;
+          }
+          this.meta.loading = true;
+          this.setStatus(this.settings.messages.loading);
+          fetch(this.settings.url + this.getUrlParams(), {
+              headers: {
+                  'Origin': 'http://localhost:8080',
+                  'Content-type': 'application/x-www-form-urlencoded'
+              }
+          }).then(response => {
+              return response.json()
+          }).then(json => {
+                this.rows = [];
+                this.params.total = json.total;
+                for (i in json.data){
+                    this.addRow(json.data[i]);
                 }
-            }).then(response => response.json()).then(json => {
-                  this.rows = [];
-                  this.params.total = json.total;
-                  for (i in json.data){
-                      this.addRow(json.data[i]);
-                  }
-              }).then(() => {
-                  this.meta.loading = false;
-                  this.setStatus(this.getSummary(this.config.messages.summary));
-              }).catch(error => {
-                  console.error('Network fetch failed:', error);
-                  this.setStatus(this.config.messages.failed);
-              });
+            }).then(() => {
+                this.meta.loading = false;
+                this.setStatus(this.getSummary(this.settings.messages.summary));
+            }).catch(error => {
+                console.error('Network fetch failed:', error);
+                this.setStatus(this.settings.messages.failed);
+            });
         },
+        // adds the data row to the table
         addRow: function(data) {
             // todo check for field formatter by name
             let row = {};
             for (i in data) {
-                if (typeof this.config.formatters[i] == 'function') {
-                    fn = this.config.formatters[i];
+                if (typeof this.settings.formatters[i] == 'function') {
+                    fn = this.settings.formatters[i];
                     row[i] = fn(data[i], data);
                 } else {
                     row[i] = data[i];
@@ -85,6 +88,7 @@ function littleTable() {
             }
             this.rows.push(row);
         },
+        // returns the url params for the GET request
         getUrlParams: function() {
             let str = '?limit='+this.params.limit+'&offset='+this.params.offset;
             if (this.params.search) {
@@ -101,33 +105,41 @@ function littleTable() {
 
             return str;
         },
+        // returns the current page number
         getCurrentPage: function() {
             if (this.params.offset == 0) {
                 return 1;
             }
             return parseInt(parseInt(this.params.offset) / parseInt(this.params.limit) + 1);
         },
+        // returns the total number of pages in the data set (on the server, requires total to be passed in result)
         getTotalPages: function() {
             return parseInt(Math.ceil(parseInt(this.params.total) / parseInt(this.params.limit)));
         },
+        // returns the total number of rows of data on the server
         getTotalRows: function() {
             return parseInt(this.params.total);
         },
+        // returns the offset of the first row
         getFirstPageOffset: function() {
             return 0;
         },
+        // returns the offset of the first row on the previous page
         getPrevPageOffset: function() {
             let int = parseInt(parseInt(this.getCurrentPage() - 2) * parseInt(this.params.limit));
             return (int < 0)  ? 0 : int;
         },
+        // returns the offset of the first row on the next page
         getNextPageOffset: function() {
             let int = parseInt(parseInt(this.getCurrentPage()) * parseInt(this.params.limit));
             return int;
         },
+        // returns the offset of the first row on the last page
         getLastPageOffset: function() {
             let int = parseInt(parseInt(this.getTotalPages() - 1) * parseInt(this.params.limit));
             return (int < 0)  ? 0 : int;
         },
+        // returns the offset for a particular page, (this may be slightly off depending on the limit chosen)
         getOffsetForPage: function() {
             // determine correct offset boundary for the current page
             // loop through pages, if (offset between prev and next) recalculate
@@ -138,9 +150,11 @@ function littleTable() {
             }
             return this.getLastPageOffset();
         },
+        // returns the index of first row on the page
         getFirstDisplayedRow: function() {
             return this.params.offset + 1;
         },
+        // returns the index of last row on the page
         getLastDisplayedRow: function() {
             let int = parseInt(this.params.offset) + parseInt(this.params.limit);
             if (int > this.params.total) {
@@ -148,6 +162,7 @@ function littleTable() {
             }
             return int;
         },
+        // returns a status summary, either number of rows or number of pages
         getSummary: function(type='rows', name='results') {
             if ( ! this.rows.length) {
                 return 'No results';
@@ -157,21 +172,16 @@ function littleTable() {
             }
             return 'Showing <strong>' + this.getFirstDisplayedRow() + '</strong> to <strong>' + this.getLastDisplayedRow() + '</strong> of <strong>' + this.getTotalRows() + '</strong> ' + name;
         },
+        // returns the required icon for the sort state
         getSortIcon: function(col) {
-            // checks for name in sort and displays the correct sort icon
-            let str = '<svg width="20px" height="20px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">';
-            if (undefined == this.sort[col]) {
-                str+= '<title>Click to sort</title><g id="sort-none" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><polygon id="desc" fill="#979797" transform="translate(100.000000, 140.000000) scale(1, -1) translate(-100.000000, -140.000000) " points="100 110 160 170 40 170"></polygon><polygon id="asc" fill="#979797" points="100 30 160 90 40 90"></polygon></g>';
-            } else {
-                if (this.sort[col] == 'asc') {
-                    str+= '<title>Sort ascending</title><g id="sort-asc" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><polygon id="asc" fill="#979797" points="100 30 160 90 40 90"></polygon></g>';
-                } else {
-                    str+= '<title>Sort descending</title><g id="sort-desc" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><polygon id="desc" fill="#979797" transform="translate(100.000000, 140.000000) scale(1, -1) translate(-100.000000, -140.000000) " points="100 110 160 170 40 170"></polygon></g>';
-                }
+            let icon = 'none';
+            if (undefined !== this.sort[col]) {
+                icon = this.sort[col];
             }
-            str+= '</svg>';
-            return str;
+            return '<svg class="icon"><use xlink:href="' + this.settings.icon + '#sort-' + icon + '"></use></svg>';
         },
+        // set the number of rows to show per page and saves preference in localStorage
+        // tries to keep the current rows on the page
         setLimit: function() {
             // sanity check input
             if (this.params.limit < 10 || this.params.limit > 100) {
@@ -182,12 +192,14 @@ function littleTable() {
             // get currentpageoffset
             this.params.offset = this.getOffsetForPage();
             // store preference
-            localStorage.setItem('littleTable.limit', this.params.limit);
+            localStorage.setItem(this.settings.key_prefix + '.limit', this.params.limit);
             this.fetch();
         },
+        // sets the statusbar text
         setStatus: function(str) {
             this.meta.status = str;
         },
+        // toggle the sort state between 'null', 'asc' and 'dsc'
         toggleSortColumn: function(col) {
             if (undefined == this.sort[col]) {
                 this.sort[col] = 'asc';
@@ -197,31 +209,37 @@ function littleTable() {
                 delete this.sort[col];
             }
         },
+        // sets the offset to the first page and fetches the data
         goFirstPage: function() {
             this.params.offset = this.getFirstPageOffset();
             this.fetch();
         },
+        // sets the offset to the top of the last page and fetches the data
         goLastPage: function() {
             this.params.offset = this.getLastPageOffset();
             this.fetch();
         },
+        // sets the offset to the top of the next page and fetches the data
         goNextPage: function() {
             this.params.offset = this.getNextPageOffset();
             this.fetch();
         },
+        // sets the offset to the top of the previous page and fetches the data
         goPrevPage: function() {
             this.params.offset = this.getPrevPageOffset();
             this.fetch();
         },
+        // todo jump to a particular page by number
         goToPage: function() {
-            // todo jump to a particular page number
         },
+        // handle the user search input, always returning to the start of the results 
         doSearch: function() {
             this.params.offset = 0;
             this.fetch();
         },
+        // handle the column sort
         doSort: function(col) {
-            if (false == this.config.multisort) {
+            if (false == this.settings.multisort) {
                 let state = this.sort[col];
                 this.sort = {};
                 this.sort[col] = state;
@@ -229,9 +247,8 @@ function littleTable() {
             this.toggleSortColumn(col);
             this.fetch();
         },
-        dd: function() {
+        debug: function() {
             return JSON.stringify(this.params) + JSON.stringify(this.meta) + JSON.stringify(this.sort);
-
         }
     }
 }

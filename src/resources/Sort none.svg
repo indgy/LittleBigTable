@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Sort none</title>
+    <g id="Sort-none" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M100,118.485281 L54.4852814,164 L145.514719,164 L100,118.485281 Z" id="desc" stroke="#979797" stroke-width="12" transform="translate(100.000000, 140.000000) scale(1, -1) translate(-100.000000, -140.000000) "></path>
+        <path d="M100,38.4852814 L54.4852814,84 L145.514719,84 L100,38.4852814 Z" id="asc" stroke="#979797" stroke-width="12"></path>
+    </g>
+</svg>
