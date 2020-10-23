@@ -2,7 +2,7 @@
 
 #### LittleBigTable is a small (~5k gzipped) javascript table built using AlpineJS
 
-![Screenshot](https://github.com/indgy/LittleBigTable/screenshot.png)
+![Screenshot](screenshot.png)
 
 *It is very new and while it works well for my purposes if you find any issues, please report them in the issue tracker.* 
 
