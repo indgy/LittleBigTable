@@ -12,7 +12,7 @@
     <section class="section">
         <div class="container">
             <h1 class="display-4">LittleBigTable with Bootstrap</h1>
-            <div x-data="LittleBigTable(options)" x-init="init()">
+            <div x-data="LittleBigTable({url:'http://localhost:8080/examples/json.php'})" x-init="init()">
                 <div class="py-4">
                     <div class="float-left">
 
@@ -83,25 +83,5 @@
     </section>
     <script src="../dist/alpine.min.js" defer></script>
     <script src="../dist/LittleBigTable.min.js"></script>
-    <script nonce="abc123">
-        options = {
-            'url': 'http://localhost:8080/examples/json.php',
-            'limit': 15,
-            'formatters': {
-                'state': function(value, row) {
-                    return '<strong>' + value + '</strong>';
-                },
-                'turbine_capacity': function(value, row) {
-                    if (parseInt(value) < 1500) {
-                        return '<span class="text-warning font-weight-bolder">' + value  + "</span>";
-                    }
-                    if (parseInt(value) > 2000) {
-                        return '<span class="text-success font-weight-bolder">' + value  + "</span>";
-                    }
-                    return '<span class="text-primary font-weight-bolder">' + value  + "</span>";
-                }
-            }
-        }
-    </script>
 </body>
 </html>
