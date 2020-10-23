@@ -2,6 +2,8 @@
 
 #### LittleBigTable is a small (~5k gzipped) javascript table built using AlpineJS
 
+![Screenshot](https://github.com/indgy/LittleBigTable/screenshot.png)
+
 *It is very new and while it works well for my purposes if you find any issues, please report them in the issue tracker.* 
 
 It is CSS agnostic so can be used with any css framework, the default examples use Bulma, there is also a basic example using Bootstrap 4. 
