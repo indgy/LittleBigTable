@@ -5,17 +5,39 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-  <title>'littleTable' Bulma example</title>
-  <meta name="description" content="An simple javascript interactive table built using Bulma and AlpineJS" />
+  <title>'LittleBigTable' Complete example</title>
+  <meta name="description" content="LittleBigTable is a small (~4k gzipped) javascript table using AlpineJS" />
+  <!-- <meta http-equiv="Content-Security-Policy" content="base-uri: 'none'; object-src: 'none'; script-src 'self' 'unsafe-eval' 'unsafe-inline' 'nonce-abc123'"> -->
 </head>
 <body>
     <section class="section">
         <div class="container">
-            <h1 class="title is-3">LittleTable with Bulma</h1>
-            <div class="little-table" x-data="littleTable()" x-init="init()">
+            <h1 class="title is-3">LittleBigTable</h1>
+            <p class="content is-size-5">This is the complete example with custom settings</p>
+            <p class="content">Passing in custom options is easy, just create an options object with the properties you want to override and pass it through the <code>x-data</code> attribute</p>
+            <pre class="mb-6"><code>let options = {
+    // set this to wherever your data comes from
+    url: 'http://localhost:8080/examples/json.php', 
+    // this is the prefix for the page limit preference, you can may want to change this on a per table basis
+    key_prefix: 'lbt',
+    // change the default status bar messages as you see fit
+    messages: {
+        loading: 'Loading...',
+        failed: 'Loading failed',
+        summary: 'rows'     // this may be null, 'rows' or 'pages'
+    },
+    // formatters change the way cell data is displayed
+    formatters: {},
+    // the location of the SVG icons file
+    icon: '../dist/icons.svg',
+}</code></pre>
+            <p class="content">
+                Now pass in your options to the component &lt;div&gt;
+            </p>
+            <pre class="mb-6"><code>&lt;div x-data="LittleBigTable(options)" x-init="init()"&gt;</code></pre>
+            <div x-data="LittleBigTable(options)" x-init="init()">
                 <div class="level">
                     <div class="level-left">
-
                         <div class="field is-horizontal">
                             <div class="field-label is-normal">
                                 <label class="label">Search</label>
@@ -28,10 +50,8 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="level-right">
-                        
                         <div class="field is-horizontal">
                             <div class="field-label is-normal">
                                 <label class="label">Show</label>
@@ -52,7 +72,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <table class="table is-fullwidth is-hoverable">
@@ -60,9 +79,9 @@
                         <tr>
                             <th class="has-text-left">State <button class="button is-small is-text" type="button" x-html="getSortIcon('state')" @click="doSort('state')"></th>
                             <th class="has-text-left">County <button class="button is-small is-text" type="button" x-html="getSortIcon('county')" @click="doSort('county')"></th>
-                            <th>Year <button class="button is-small is-text" type="button" x-html="getSortIcon('year')" @click="doSort('year')"></button></th>
-                            <th>Capacity <button class="button is-small is-text" type="button" x-html="getSortIcon('turbine_capacity')" @click="doSort('turbine_capacity')"></th>
-                            <th>Turbines <button class="button is-small is-text" type="button" x-html="getSortIcon('project_capacity')" @click="doSort('project_capacity')"></th>
+                            <th class="has-text-centered">Year <button class="button is-small is-text" type="button" x-html="getSortIcon('year')" @click="doSort('year')"></button></th>
+                            <th class="has-text-centered">Capacity <button class="button is-small is-text" type="button" x-html="getSortIcon('turbine_capacity')" @click="doSort('turbine_capacity')"></th>
+                            <th class="has-text-centered">Turbines <button class="button is-small is-text" type="button" x-html="getSortIcon('project_capacity')" @click="doSort('project_capacity')"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -85,19 +104,27 @@
                         <nav class="pagination" role="navigation" aria-label="pagination">
                             <ul class="pagination-list">
                                 <li>
-                                    <a class="pagination-link" aria-label="Goto first page" @click="goFirstPage()" :disabled="getCurrentPage() == 1">|&lt;</a>
+                                    <a class="pagination-link" aria-label="Goto first page" @click="goFirstPage()" :disabled="getCurrentPage() == 1">
+                                        <svg class="icon"><use xlink:href="../dist/icons.svg#page-first"></use></svg>
+                                    </a>
                                 </li>
                                 <li>
-                                    <a class="pagination-previous" @click="goPrevPage()" :disabled="getCurrentPage() == 1">&lt;</a>
+                                    <a class="pagination-previous" @click="goPrevPage()" :disabled="getCurrentPage() == 1">
+                                        <svg class="icon"><use xlink:href="../dist/icons.svg#page-prev"></use></svg>
+                                    </a>
                                 </li>
                                 <li>
                                     
                                 </li>
                                 <li>
-                                    <a class="pagination-next" @click="goNextPage()" :disabled="getCurrentPage() == getTotalPages()">&gt;</a>
+                                    <a class="pagination-next" @click="goNextPage()" :disabled="getCurrentPage() == getTotalPages()">
+                                        <svg class="icon"><use xlink:href="../dist/icons.svg#page-next"></use></svg>
+                                    </a>
                                 </li>
                                 <li>
-                                    <a class="pagination-link" aria-label="Goto last page" @click="goLastPage()" :disabled="getCurrentPage() == getTotalPages()">&gt;|</a>
+                                    <a class="pagination-link" aria-label="Goto last page" @click="goLastPage()" :disabled="getCurrentPage() == getTotalPages()">
+                                        <svg class="icon"><use xlink:href="../dist/icons.svg#page-last"></use></svg>
+                                    </a>
                                 </li>
                             </ul>
                         </nav>
@@ -106,14 +133,34 @@
             </div>
         </div>
     </section>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.1/dist/alpine.min.js" defer></script>
-    <script>
+    <script src="../dist/alpine.min.js" defer></script>
+    <script src="../dist/LittleBigTable.min.js"></script>
+    <script nonce="abc123">
+        options = {
+            'url': 'http://localhost:8080/examples/json.php',
+            'limit': 25,
+            'formatters': {
+                'state': function(value, row) {
+                    return '<strong>' + value + '</strong>';
+                },
+                'turbine_capacity': function(value, row) {
+                    if (parseInt(value) < 1500) {
+                        return '<span class="has-text-warning has-text-weight-medium">' + value  + "</span>";
+                    }
+                    if (parseInt(value) > 2000) {
+                        return '<span class="has-text-success has-text-weight-medium">' + value  + "</span>";
+                    }
+                    return '<span class="has-text-link has-text-weight-medium">' + value  + "</span>";
+                }
+            }
+        }
+        // this is an example of a row click event, in this example the row is specified as follows:
+        // <tr @click="doRowClicked($event)" data-id="xyz">
         function doRowClicked(e) {
             console.log('The row was clicked, below is the event and the data-id of the row');
             console.log(e);
             console.log(e.target.parentNode.attributes['data-id'].value);
         }
     </script>
-    <script src="../dist/littleTable.js"></script>
 </body>
 </html>
