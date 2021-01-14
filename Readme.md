@@ -2,7 +2,7 @@
 
 #### LittleBigTable is a small (~5k gzipped) javascript table built using AlpineJS
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot.gif)
 
 See the [Complete example](http://iangrindley.uk/LittleBigTable/examples/complete.php) in action, this uses Bulma for the styling as shown above.
 
