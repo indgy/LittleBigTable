@@ -12,7 +12,7 @@ function LittleBigTable(settings) {
                 summary: 'rows'
             },
             formatters: {},
-            icon: '../dist/icons.svg',
+            icons: '../dist/icons.svg',
         },
         // stores the ui state
         meta: {
@@ -176,7 +176,7 @@ function LittleBigTable(settings) {
             if (undefined !== this.sort[col]) {
                 icon = this.sort[col];
             }
-            return '<svg class="icon"><use xlink:href="' + this.settings.icon + '#sort-' + icon + '"></use></svg>';
+            return '<svg class="icon"><use xlink:href="' + this.settings.icons + '#sort-' + icon + '"></use></svg>';
         },
         // set the number of rows to show per page and saves preference in localStorage
         // tries to keep the current rows on the page
