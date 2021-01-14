@@ -55,7 +55,9 @@ function LittleBigTable(settings) {
           this.meta.loading = true;
           this.setStatus(this.settings.messages.loading);
           fetch(this.settings.url + this.getUrlParams(), {
-              headers: {}
+              headers: {
+                  'X-Requested-With': 'XMLHttprequest'
+              }
           }).then(response => {
               return response.json()
           }).then(json => {
