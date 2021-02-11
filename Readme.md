@@ -207,6 +207,25 @@ If you need to add or adjust the default HTTP headers pass the headers key in th
 </div>
 ``` 
 
+## Changing the URL query arguments
+
+If you need to change the default query argument names pass the args key in the options
+```html
+<script>
+let options = {
+  args: {
+    offset: 'page',
+    limit: 'show_per_page',
+    search: 'query',
+    sort: 'order_by'
+  },
+}
+</script>
+<div x-data="littleBIGtable(options)" x-init="init()">
+  ...
+</div>
+``` 
+
 ### Custom events
 
 It is possible to create custom event handlers, for example to handle a row 'click' add the `@click` handler to your table rows and provide the name of your custom function which can be included anywhere on the page or in a separate file. 
