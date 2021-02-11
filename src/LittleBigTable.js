@@ -1,4 +1,4 @@
-function LittleBigTable(settings) {
+function littleBIGtable(settings) {
     return {
         // settings for the developer to override
         settings: {

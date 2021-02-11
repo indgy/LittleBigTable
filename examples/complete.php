@@ -5,14 +5,14 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-  <title>'LittleBigTable' Complete example</title>
-  <meta name="description" content="LittleBigTable is a small (~4k gzipped) javascript table using AlpineJS" />
+  <title>'littleBIGtable' Complete example</title>
+  <meta name="description" content="littleBIGtable is a small (~4k gzipped) javascript table using AlpineJS" />
   <!-- <meta http-equiv="Content-Security-Policy" content="base-uri: 'none'; object-src: 'none'; script-src 'self' 'unsafe-eval' 'unsafe-inline' 'nonce-abc123'"> -->
 </head>
 <body>
     <section class="section">
         <div class="container">
-            <h1 class="title is-3">LittleBigTable</h1>
+            <h1 class="title is-3">littleBIGtable</h1>
             <p class="content is-size-5">This is the complete example with custom settings</p>
             <p class="content">Passing in custom options is easy, just create an options object with the properties you want to override and pass it through the <code>x-data</code> attribute</p>
             <pre class="mb-6"><code>let options = {
@@ -34,8 +34,8 @@
             <p class="content">
                 Now pass in your options to the component &lt;div&gt;
             </p>
-            <pre class="mb-6"><code>&lt;div x-data="LittleBigTable(options)" x-init="init()"&gt;</code></pre>
-            <div x-data="LittleBigTable(options)" x-init="init()">
+            <pre class="mb-6"><code>&lt;div x-data="littleBIGtable(options)" x-init="init()"&gt;</code></pre>
+            <div x-data="littleBIGtable(options)" x-init="init()">
                 <div class="level">
                     <div class="level-left">
                         <div class="field is-horizontal">
@@ -134,7 +134,7 @@
         </div>
     </section>
     <script src="../dist/alpine.min.js" defer></script>
-    <script src="../dist/LittleBigTable.min.js"></script>
+    <script src="../dist/littleBIGtable.min.js"></script>
     <script nonce="abc123">
         options = {
             'url': 'http://localhost:8080/examples/json.php',

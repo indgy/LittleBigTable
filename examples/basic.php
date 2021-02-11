@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>'LittleBigTable' Basic example</title>
-  <meta name="description" content="LittleBigTable is a small (~4k gzipped) javascript table using AlpineJS" />
+  <title>'littleBIGtable' Basic example</title>
+  <meta name="description" content="littleBIGtable is a small (~4k gzipped) javascript table using AlpineJS" />
   <!-- <meta http-equiv="Content-Security-Policy" content="base-uri: 'none'; object-src: 'none'; script-src 'self' 'unsafe-eval' 'unsafe-inline' 'nonce-abc123'"> -->
   <style>
     .table, .pager {
@@ -28,9 +28,9 @@
   </style>
 </head>
 <body>
-    <h1>LittleBigTable</h1>
+    <h1>littleBIGtable</h1>
     <p>This is the basic example with no styling, using the default settings, only the url must be specified.</p>
-    <div x-data="LittleBigTable({url:'/examples/json.php'})" x-init="init()">
+    <div x-data="littleBIGtable({url:'/examples/json.php'})" x-init="init()">
         <table class="table">
             <thead>
                 <tr>
@@ -75,6 +75,6 @@
         </nav>
     </div>
     <script src="../dist/alpine.min.js" defer></script>
-    <script src="../dist/LittleBigTable.min.js"></script>
+    <script src="../dist/littleBIGtable.min.js"></script>
 </body>
 </html>

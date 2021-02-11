@@ -1,14 +1,14 @@
-# LittleBigTable
+# littleBIGtable
 
-#### LittleBigTable is a small (~5k gzipped) javascript table built using AlpineJS
+#### littleBIGtable is a small (~5k gzipped) javascript table built using AlpineJS
 
 ![Screenshot](screenshot.gif)
 
-See the [Complete example](http://iangrindley.uk/LittleBigTable/examples/complete.php) in action, this uses Bulma for the styling as shown above.
+See the [Complete example](http://iangrindley.uk/littleBIGtable/examples/complete.php) in action, this uses Bulma for the styling as shown above.
 
-*LittleBigTable is very new and while it works well for my purposes you may find issues, please report them in the issue tracker.* 
+*littleBIGtable is very new and while it works well for my purposes you may find issues, please report them in the issue tracker.* 
 
-LittleBigTable is CSS agnostic and can be used with any css framework, the default examples use Bulma, there is also a [Bootstrap example](http://iangrindley.uk/LittleBigTable/examples/bootstrap.php) using Bootstrap 4 and a [Basic example](http://iangrindley.uk/LittleBigTable/examples/basic.php) with no css. I imagine it would be great with TailwindCSS too.
+littleBIGtable is CSS agnostic and can be used with any css framework, the default examples use Bulma, there is also a [Bootstrap example](http://iangrindley.uk/littleBIGtable/examples/bootstrap.php) using Bootstrap 4 and a [Basic example](http://iangrindley.uk/littleBIGtable/examples/basic.php) with no css. I imagine it would be great with TailwindCSS too.
 
 As you have complete control over the HTML you can structure and style it however you wish.
 
@@ -24,10 +24,10 @@ I created this as too many table plugins render the table in an opinionated fash
 
 ### Get started
 
-This is the starting point for all LittleBigTables, you must wrap your table in an AlpineJS component, provide a url to your api endpoint and specify your table columns and rows. The code below is an example of the minium required.
+This is the starting point for all littleBIGtables, you must wrap your table in an AlpineJS component, provide a url to your api endpoint and specify your table columns and rows. The code below is an example of the minium required.
 
 ```html
-<div x-data="LittleBigTable({url:'/location/of/your/api'})" x-init="init()">
+<div x-data="littleBIGtable({url:'/location/of/your/api'})" x-init="init()">
 	<table>
 		<thead>
 			<tr>
@@ -48,10 +48,10 @@ This is the starting point for all LittleBigTables, you must wrap your table in 
 	</table>
 </div>
 <script src="/path/to/alpine.min.js" defer></script>
-<script src="/path/to/LittleBigTable.min.js"></script>
+<script src="/path/to/littleBIGtable.min.js"></script>
 ```
 
-Check the source of the [Basic example](http://iangrindley.uk/LittleBigTable/examples/basic.php) to see this in action.
+Check the source of the [Basic example](http://iangrindley.uk/littleBIGtable/examples/basic.php) to see this in action.
 
 
 ### Settings
@@ -60,7 +60,7 @@ The following settings can be overriden by passing in an object in the `x-data` 
 
 ## Fetching data
 
-LittleBigTable expects a JSON response from your endpoint, the object must contain two properties, an Integer `total` and an Array `data` with total being the total number of rows in the remote dataset and data containing the subset of rows to be displayed.
+littleBIGtable expects a JSON response from your endpoint, the object must contain two properties, an Integer `total` and an Array `data` with total being the total number of rows in the remote dataset and data containing the subset of rows to be displayed.
 
 In PHP you might do something like this:
 
@@ -98,7 +98,7 @@ NB: If you are returning HTML you must us the `x-html` directive on the `<td>` e
 
 ### Creating a formatter
 
-To create a formatter add your function into the formatters setting passed to LittleBigTable. Your function will receive the cell value and the complete row data. Whatever you return will be displayed in the cell.
+To create a formatter add your function into the formatters setting passed to littleBIGtable. Your function will receive the cell value and the complete row data. Whatever you return will be displayed in the cell.
 
 Assuming you have columns called `year` and `rating` you can create formatters as follows:
 
@@ -156,7 +156,7 @@ Row limiters limit the number of rows displayed at any one time, the default is 
 
 Simply add a drop down and add the '' function. This is limited to between 1 and 100 rows.
 
-Check the [Complete example](http://iangrindley.uk/LittleBigTable/examples/complete.php) for more details.
+Check the [Complete example](http://iangrindley.uk/littleBIGtable/examples/complete.php) for more details.
 
 #### Adding a search box
 
@@ -164,7 +164,7 @@ A search box can be used to filter your remote data.
 
 Add the code for the search box, ensuring it is inside the  component div (the one with the x-data attribute) and add the following ''
 
-Check the [Complete example](http://iangrindley.uk/LittleBigTable/examples/complete.php) for more details.
+Check the [Complete example](http://iangrindley.uk/littleBIGtable/examples/complete.php) for more details.
 
 #### Making columns sortable
 

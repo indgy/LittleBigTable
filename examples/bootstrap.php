@@ -5,14 +5,14 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-  <title>'LittleBigTable' Bootstrap example</title>
+  <title>'littleBIGtable' Bootstrap example</title>
   <meta name="description" content="A simple AlpineJS interactive table" />
 </head>
 <body>
     <section class="section">
         <div class="container">
-            <h1 class="display-4">LittleBigTable with Bootstrap</h1>
-            <div x-data="LittleBigTable({url:'http://localhost:8080/examples/json.php'})" x-init="init()">
+            <h1 class="display-4">littleBIGtable with Bootstrap</h1>
+            <div x-data="littleBIGtable({url:'http://localhost:8080/examples/json.php'})" x-init="init()">
                 <div class="py-4">
                     <div class="float-left">
 
@@ -82,6 +82,6 @@
         </div>
     </section>
     <script src="../dist/alpine.min.js" defer></script>
-    <script src="../dist/LittleBigTable.min.js"></script>
+    <script src="../dist/littleBIGtable.min.js"></script>
 </body>
 </html>
