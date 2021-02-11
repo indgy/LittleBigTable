@@ -188,7 +188,7 @@ The `getSortIcon()` method will automatically show the correct icon state using 
 
 The `doSort()` method sets the URL sort parameter and fetches the sorted data. The url parameter appears as `&sort=column_name:asc` or  `&sort=column_name:dsc` depending on the requested sort direction.
 
-Check the [Complete example](http://iangrindley.uk/LittleBigTable/examples/complete.php) for more details.
+Check the [Complete example](http://iangrindley.uk/littleBIGtable/examples/complete.php) for more details.
 
 
 ### Custom events
