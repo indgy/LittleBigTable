@@ -190,6 +190,22 @@ The `doSort()` method sets the URL sort parameter and fetches the sorted data. T
 
 Check the [Complete example](http://iangrindley.uk/littleBIGtable/examples/complete.php) for more details.
 
+## Adding HTTP headers
+
+If you need to add or adjust the default HTTP headers pass the headers key in the options, the default headers are shown below:
+```html
+<script>
+  let options = {
+  headers: {
+    'Content-Type': 'application/json',
+    'X-Requested-With': 'littleBIGtable'
+  },
+}
+</script>
+<div x-data="littleBIGtable(options)" x-init="init()">
+  ...
+</div>
+``` 
 
 ### Custom events
 

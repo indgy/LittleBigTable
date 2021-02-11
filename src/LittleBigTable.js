@@ -11,6 +11,10 @@ function littleBIGtable(settings) {
                 failed: 'Loading failed',
                 summary: 'rows'
             },
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Requested-With': 'littleBIGtable'
+            },
             formatters: {},
             icons: '../dist/icons.svg',
         },
@@ -54,11 +58,8 @@ function littleBIGtable(settings) {
           }
           this.meta.loading = true;
           this.setStatus(this.settings.messages.loading);
-          fetch(this.settings.url + this.getUrlParams(), {
-              headers: {
-                  'X-Requested-With': 'XMLHttprequest'
-              }
-          }).then(response => {
+          fetch(this.settings.url + this.getUrlParams(), {headers: this.settings.headers})
+            .then(response => {
               return response.json()
           }).then(json => {
                 this.rows = [];
