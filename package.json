@@ -1,0 +1,38 @@
+{
+  "name": "littlebigtable",
+  "version": "0.1.0",
+  "description": "A lightweight (~5k gzipped) interactive HTML table built using AlpineJS",
+  "license": "MIT",
+  "author": {
+      "name": "indgy",
+      "url": "https://indgy.github.io"
+  },
+  "homepage": "https://github.com/indgy/LittleBigTable#readme",
+  "bugs": {
+    "url": "https://github.com/indgy/LittleBigTable/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/indgy/LittleBigTable.git"
+  },
+  "keywords": [
+    "html",
+    "ajax",
+    "javascript",
+    "filter",
+    "table",
+    "grid",
+    "datagrid",
+    "sort",
+    "paginate",
+    "pagination",
+    "alpine",
+    "alpinejs"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+     "alpinejs": "2.8.0"
+  }
+}
