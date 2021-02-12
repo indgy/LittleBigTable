@@ -27,7 +27,8 @@
     "paginate",
     "pagination",
     "alpine",
-    "alpinejs"
+    "alpinejs",
+    "lbt"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
