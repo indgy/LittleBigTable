@@ -195,7 +195,7 @@ function littleBIGtable(settings) {
         setLimit: function() {
             // sanity check input
             if (this.params.limit < 10 || this.params.limit > 100) {
-                this.params.limit = 25;
+                this.params.limit = 10;
             }
             // reset offset and fetch
             // determine current position, if greater than last page, go to last page
