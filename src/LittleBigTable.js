@@ -97,9 +97,9 @@ function littleBIGtable(settings) {
         },
         // returns the url params for the GET request
         getUrlParams: function() {
-            let str = `?{this.settings.args.limit}={this.params.limit}&{this.settings.args.offset}={this.params.offset}`;
+            let str = '?'+this.settings.args.limit+'='+this.params.limit+'&'+this.settings.args.offset+'='+this.params.offset;
             if (this.params.search) {
-                str+= `&{this.settings.args.search}={this.params.search}`;
+                str+= '&'+this.settings.args.search+'='+this.params.search;
             }
 
             let sort = null;
@@ -107,7 +107,7 @@ function littleBIGtable(settings) {
                 sort = i + ':' + this.sort[i];
             }
             if (sort) {
-                str+= `&{this.settings.args.sort}={sort}`;
+                str+= '&'+this.settings.args.sort+'='+sort;
             }
 
             return str;
