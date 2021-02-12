@@ -3,7 +3,7 @@ function littleBIGtable(settings) {
         // settings for the developer to override
         settings: {
             url: null,
-            key_prefix: 'lbt',
+            key_prefix: 'lBt',
             limit: 10,
             multisort: false,
             args: {
