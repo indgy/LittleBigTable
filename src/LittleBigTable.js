@@ -7,8 +7,8 @@ function littleBIGtable(settings) {
             limit: 10,
             multisort: false,
             args: {
-              offset: 'offset',
               limit: 'limit',
+              offset: 'offset',
               search: 'search',
               sort: 'sort'
             },
@@ -59,7 +59,7 @@ function littleBIGtable(settings) {
         // fetch and populate data using current state
         fetch: function() {
           if ( ! this.settings.url) {
-            this.setStatus('Missing api url, pass it in the settings.');
+            this.setStatus('Missing endpoint url, ensure you specify it in settings.');
             return;
           }
           this.meta.loading = true;
@@ -255,7 +255,7 @@ function littleBIGtable(settings) {
             this.fetch();
         },
         debug: function() {
-            return JSON.stringify(this.params) + JSON.stringify(this.meta) + JSON.stringify(this.sort);
+            return "Params:\n"+JSON.stringify(this.params)+"\nSort:\n"+JSON.stringify(this.sort)+"\nMeta:\n"+JSON.stringify(this.meta)+"\nSettings:\n"+JSON.stringify(this.settings);
         }
     }
 }
