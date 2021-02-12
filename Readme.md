@@ -39,6 +39,51 @@ First dependable release, I have started using this in Production.
 
 - An issue with the pager display when the total number of results was less than number of results to show 
 
+## Installation
+
+### Using the CDN
+
+Link to the main javascript file
+
+```html
+<script src="https://unpkg.com/littlebigtable@0.1.0/dist/littleBIGtable.min.js" defer></script>
+```
+
+If you want to use the supplied icons you must refer to them when passing in your options to the littleBIGtable component:
+
+```js
+let opts = {
+  icons: "https://unpkg.com/littlebigtable@0.1.0/dist/icons.svg"
+}
+```
+```html
+<div x-data="littleBIGtable(opts)" x-init="init()">
+
+</div>
+```
+
+### Manually
+Copy the `icons.svg` and `littelBIGtable.min.js` files from the dist folder into your project somewhere and add the following script element.
+
+```html
+<script src="/path/to/your/folder/littleBIGtable.min.js" defer></script>
+```
+
+You will need to change the icons.svg locations as well, see the examples for details.
+
+```html
+<svg><use xlink:href="/path/to/your/install/folder/icons.svg#[name-of-icon]"></use></svg>
+```
+
+### Using npm
+
+There is an npm package for littleBIGtable available for install, however it is not recommended until the package is updated.
+
+```sh
+npm install littlebigtable
+```
+
+
 ## Documentation
 
 ### Get started
