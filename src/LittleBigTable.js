@@ -93,6 +93,13 @@ function littleBIGtable(settings) {
                     row[i] = data[i];
                 }
             }
+            // add columns from formatters
+            for (i in this.settings.formatters) {
+              if ( ! row.hasOwnProperty(i)) {
+                fn = this.settings.formatters[i];
+                row[i] = fn(data[i], data);
+              }
+            }
             this.rows.push(row);
         },
         // returns the url params for the GET request
