@@ -77,7 +77,7 @@ function littleBIGtable(settings) {
                 this.meta.loading = false;
                 this.setStatus(this.getSummary(this.settings.messages.summary));
             }).catch(error => {
-                console.error('Network fetch failed, did you set the endpoint correctly? Error: ', error);
+                console.error('Network fetch failed: ', error);
                 this.setStatus(this.settings.messages.failed);
             });
         },
