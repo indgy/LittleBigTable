@@ -46,14 +46,14 @@ First dependable release, I have started using this in Production.
 Link to the main javascript file
 
 ```html
-<script src="https://unpkg.com/littlebigtable@0.1.0/dist/littleBIGtable.min.js" defer></script>
+<script src="https://unpkg.com/littlebigtable@0.1.1/dist/littleBIGtable.min.js" defer></script>
 ```
 
 If you want to use the supplied icons you must refer to them when passing in your options to the littleBIGtable component:
 
 ```js
 let opts = {
-  icons: "https://unpkg.com/littlebigtable@0.1.0/dist/icons.svg"
+  icons: "https://unpkg.com/littlebigtable@0.1.1/dist/icons.svg"
 }
 ```
 ```html
