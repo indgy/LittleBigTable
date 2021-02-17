@@ -1,6 +1,6 @@
 {
   "name": "littlebigtable",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A lightweight (~5k gzipped) interactive HTML table built using AlpineJS",
   "license": "MIT",
   "author": {
