@@ -4,11 +4,11 @@
 
 ![Screenshot](screenshot.gif)
 
-See the [Complete example](http://iangrindley.uk/littleBIGtable/examples/complete.php) in action, this uses Bulma for the styling as shown above.
+See the [Complete example](https://littlebigtable.indgy.uk/examples/complete.php) in action, this uses Bulma for the styling as shown above.
 
 *littleBIGtable is very new and while it works well for my purposes you may find issues, please report them in the issue tracker.* 
 
-littleBIGtable is CSS agnostic and can be used with any css framework, the default examples use Bulma, there is also a [Bootstrap example](http://iangrindley.uk/littleBIGtable/examples/bootstrap.php) using Bootstrap 4 and a [Basic example](http://iangrindley.uk/littleBIGtable/examples/basic.php) with no css. I imagine it would be great with TailwindCSS too.
+littleBIGtable is CSS agnostic and can be used with any css framework, the default examples use Bulma, there is also a [Bootstrap example](https://littlebigtable.indgy.uk/examples/bootstrap.php) using Bootstrap 4 and a [Basic example](https://littlebigtable.indgy.uk/examples/basic.php) with no css. I imagine it would be great with TailwindCSS too.
 
 As you have complete control over the HTML you can structure and style it however you wish.
 
@@ -46,7 +46,7 @@ First dependable release, I have started using this in Production.
 Link to the main javascript file
 
 ```html
-<script src="https://unpkg.com/littlebigtable@0.1.1/dist/littleBIGtable.min.js" defer></script>
+<script src="https://unpkg.com/littlebigtable@0.1.1/dist/littleBIGtable.min.js"></script>
 ```
 
 If you want to use the supplied icons you must refer to them when passing in your options to the littleBIGtable component:
@@ -66,7 +66,7 @@ let opts = {
 Copy the `icons.svg` and `littelBIGtable.min.js` files from the dist folder into your project somewhere and add the following script element.
 
 ```html
-<script src="/path/to/your/folder/littleBIGtable.min.js" defer></script>
+<script src="/path/to/your/folder/littleBIGtable.min.js"></script>
 ```
 
 You will need to change the icons.svg locations as well, see the examples for details.
@@ -115,7 +115,7 @@ This is the starting point for all littleBIGtables, you must wrap your table in 
 <script src="/path/to/littleBIGtable.min.js"></script>
 ```
 
-Check the source of the [Basic example](http://iangrindley.uk/littleBIGtable/examples/basic.php) to see this in action.
+Check the source of the [Basic example](https://littlebigtable.indgy.uk/examples/basic.php) to see this in action.
 
 
 ### Settings
@@ -220,7 +220,7 @@ Row limiters limit the number of rows displayed at any one time, the default is 
 
 Simply add a drop down and add the '' function. This is limited to between 1 and 100 rows.
 
-Check the [Complete example](http://iangrindley.uk/littleBIGtable/examples/complete.php) for more details.
+Check the [Complete example](https://littlebigtable.indgy.uk/examples/complete.php) for more details.
 
 #### Adding a search box
 
@@ -228,7 +228,7 @@ A search box can be used to filter your remote data.
 
 Add the code for the search box, ensuring it is inside the  component div (the one with the x-data attribute) and add the following ''
 
-Check the [Complete example](http://iangrindley.uk/littleBIGtable/examples/complete.php) for more details.
+Check the [Complete example](https://littlebigtable.indgy.uk/examples/complete.php) for more details.
 
 #### Making columns sortable
 
@@ -252,7 +252,7 @@ The `getSortIcon()` method will automatically show the correct icon state using 
 
 The `doSort()` method sets the URL sort parameter and fetches the sorted data. The url parameter appears as `&sort=column_name:asc` or  `&sort=column_name:dsc` depending on the requested sort direction.
 
-Check the [Complete example](http://iangrindley.uk/littleBIGtable/examples/complete.php) for more details.
+Check the [Complete example](https://littlebigtable.indgy.uk/examples/complete.php) for more details.
 
 ## Adding HTTP headers
 
