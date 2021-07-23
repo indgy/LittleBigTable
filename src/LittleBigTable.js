@@ -28,6 +28,7 @@ function littleBIGtable(settings) {
         meta: {
             loading: false,
             status: null,
+            icons_cached: false,
         },
         // stores the parameters passed in query string
         params: {
@@ -53,6 +54,27 @@ function littleBIGtable(settings) {
               this.settings[i] = settings[i];
             }
           }
+
+          //cache icons
+          fetch(this.settings.icons).then(response => response.text()).then((iconssvgtext) => {
+
+              let parser = new DOMParser();
+              let icons = parser.parseFromString(iconssvgtext, 'image/svg+xml');
+
+              let wrapper = document.createElement('div');
+              wrapper.setAttribute('id', 'iconscache');
+              wrapper.style.display = 'none';
+              wrapper.insertAdjacentElement('afterbegin', icons.firstElementChild);
+
+              Array.prototype.map.call(wrapper.getElementsByTagName('symbol'),(el) =>{
+                  el.setAttribute('id','cachedicon_'+el.getAttribute('id'))
+              });
+
+              document.body.insertAdjacentElement('beforeend', wrapper);
+
+              this.meta.icons_cached = true
+
+          });
           // fetch data
           this.fetch();
         },
@@ -195,7 +217,7 @@ function littleBIGtable(settings) {
             if (undefined !== this.sort[col]) {
                 icon = this.sort[col];
             }
-            return '<svg class="icon"><use xlink:href="' + this.settings.icons + '#sort-' + icon + '"></use></svg>';
+            return '<svg class="icon"><use xlink:href="' + (this.meta.icons_cached ? '#cachedicon_' : (this.settings.icons+'#')) + 'sort-' + icon + '"></use></svg>';
         },
         // set the number of rows to show per page and saves preference in localStorage
         // tries to keep the current rows on the page
